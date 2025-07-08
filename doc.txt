@@ -1,0 +1,29 @@
+Socket.IO requires the HTTP server: Socket.IO doesn't work directly with the Express application (app). Instead, it needs to attach itself to the underlying HTTP server.
+
+The flow of creation:
+
+First, you create an Express app (const app = express())
+
+Then you create an HTTP server using Node's http module, passing the Express app (const server = http.createServer(app))
+
+Then you initialize Socket.IO with this server (const io = new Server(server))
+
+Why not app.listen()?
+
+If you used app.listen(), it would create its own HTTP server internally, but then you wouldn't have a reference to that server to pass to Socket.IO
+
+By explicitly creating the HTTP server first, you can then pass it to both Express and Socket.IO
+
+Functionally equivalent but more flexible:
+
+app.listen() is essentially just a convenience method that does http.createServer(app).listen()
+
+By doing it manually, you gain the ability to attach other things (like Socket.IO) to the same server
+
+So in summary, we use server.listen() instead of app.listen() because:
+
+We need the server reference for Socket.IO
+
+We want both Express and Socket.IO to use the same server instance
+
+It gives us more control over the server configuration
