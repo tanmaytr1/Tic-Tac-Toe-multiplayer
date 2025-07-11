@@ -59,10 +59,9 @@ npm install express socket.io
 ```bash
 node server.js
 ```
+✅ You should see: Listening on port 3000
 
-### ✅ You should see: Listening on port 3000
-
-### Access the game
+Access the game
 ### Open your browser and go to:
 ```bash
 http://localhost:3000
